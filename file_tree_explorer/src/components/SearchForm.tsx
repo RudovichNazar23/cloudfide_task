@@ -3,14 +3,14 @@ import { JSX } from "react";
 
 export default function SearchForm(): JSX.Element {
     return (
-        <>
-            <div className={"col-2"} />
-            <div className={"col-6"}>
-                <input className={"form-control p-2"} placeholder={"Search for file or folder"} type={"text"}/>
+        <nav className="navbar bg-body-secondary">
+            <div className="container-fluid">
+                <a className="navbar-brand" href={"/"}>File tree explorer</a>
+                <form className="d-flex" role="search">
+                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                    <button className="btn btn-outline-success" type="submit">Search</button>
+                </form>
             </div>
-            <button className={"col-2 btn btn-success"}>
-                Search
-            </button>
-        </>
+        </nav>
     );
 };

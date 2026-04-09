@@ -4,7 +4,6 @@ import { JSX } from 'react';
 import { useState } from "react";
 import {useNavigate} from "react-router";
 
-import SearchForm from "./SearchForm.tsx";
 import FormHeader from "./FormHeader.tsx";
 import FormButton from "./FormButton.tsx";
 
@@ -40,7 +39,7 @@ export default function MainPage(): JSX.Element {
             reader.readAsText(selectedFile);
         }
     };
-
+    // @ts-ignore
     const onAddFile = (e:MouseEvent<HTMLButtonElement, MouseEvent>) => {
       e.preventDefault();
       const data = localStorage.getItem("treeData");
@@ -61,9 +60,6 @@ export default function MainPage(): JSX.Element {
 
     return (
         <div className={"row p-0 m-0"}>
-            <div className={"row  p-4 bg-body-tertiary"}>
-                <SearchForm />
-            </div>
             <div className={"row mt-4"}>
                 <FormHeader />
                 <div className={"row justify-content-center text-center"}>
