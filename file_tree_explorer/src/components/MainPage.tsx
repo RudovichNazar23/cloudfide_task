@@ -2,14 +2,16 @@
 import { JSX } from 'react';
 
 import { useState } from "react";
+import {useNavigate} from "react-router";
 
 import SearchForm from "./SearchForm.tsx";
 import FormHeader from "./FormHeader.tsx";
 import FormButton from "./FormButton.tsx";
 
 export default function MainPage(): JSX.Element {
-    const [file, setFile] = useState<File | null>(null);
+    // @ts-ignore
     const [errorMessage, setErrorMessage] = useState<string>("");
+    const navigate = useNavigate();
 
     const onChangeEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files || e.target.files.length === 0) return;
@@ -21,13 +23,39 @@ export default function MainPage(): JSX.Element {
             setErrorMessage("This type is not supported");
         }
         else{
-            setErrorMessage("")
-            setFile(selectedFile);
+            setErrorMessage("");
+            const reader = new FileReader();
+            reader.onload = (event: ProgressEvent<FileReader>) => {
+                try {
+                    const text = event.target?.result;
+                    if (typeof text !== "string") throw new Error();
+
+                    const parsed = JSON.parse(text);
+
+                    localStorage.setItem("treeData", JSON.stringify(parsed));
+                } catch {
+                    setErrorMessage("Invalid JSON structure");
+                }
+            };
+            reader.readAsText(selectedFile);
         }
     };
 
+    const onAddFile = (e:MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      e.preventDefault();
+      const data = localStorage.getItem("treeData");
+
+      if (!errorMessage && data){
+          setErrorMessage("");
+          navigate("/tree");
+      }
+      else{
+          setErrorMessage("Please, upload a JSON file")
+      }
+    };
+
     const onDeleteEvent = () => {
-        setFile(null);
+        localStorage.removeItem("treeData");
         window.location.reload();
     }
 
@@ -54,7 +82,7 @@ export default function MainPage(): JSX.Element {
                         )
                     }
                     <div className={"row mt-2 justify-content-center"}>
-                        <FormButton buttonText={"Add"} textPlace={"end"} buttonColor={"success"} onClickEvent={() => console.log("Added")}/>
+                        <FormButton buttonText={"Add"} textPlace={"end"} buttonColor={"success"} onClickEvent={(e) => onAddFile(e)}/>
                         <FormButton buttonText={"Delete"} textPlace={"start"} buttonColor={"danger"} onClickEvent={() => onDeleteEvent()}/>
                     </div>
                 </div>
