@@ -13,7 +13,7 @@ function App() {
     <Routes>
       <Route path="/" element={<MainPage/>} />
       <Route path={"/tree"} element={<FileTree/>} />
-      <Route path={"/tree/:nodePath"} element={<NodeDetails />}/>
+      <Route path={"/tree/*"} element={<NodeDetails />}/>
     </Routes>
   </BrowserRouter>
 }
