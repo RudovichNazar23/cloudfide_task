@@ -17,14 +17,13 @@ export default function TreeNode({ node, path }: TreeNodeProps): JSX.Element {
     const [expanded, setExpanded] = useState(false);
 
     const currentPath = path ? `${path}/${node.name}` : node.name;
-    const encodedPath = encodeURIComponent(currentPath);
 
     if (node.type === "file") {
         return (
             <div className={"row ms-3 mt-3"}>
                 <div className={"col-12 container d-flex flex-row align-content-center gap-1"}>
                     <div className={"align-self-center"}><img className={"img-fluid"} src={"/file.png"} height={"25"} width={"25"} alt={"file"}/></div>
-                    <Link to={`/tree/${encodedPath}`}>
+                    <Link to={`/tree/${currentPath}`} state={{node: node, fullPath: currentPath}}>
                         {node.name}
                     </Link>
                 </div>
@@ -40,7 +39,7 @@ export default function TreeNode({ node, path }: TreeNodeProps): JSX.Element {
                     {node.name}
                 </button>
                 <div className={" align-self-center"}>
-                    <Link to={`/tree/${encodedPath}`}>[details]</Link>
+                    <Link to={`/tree/${currentPath}`} state={{node: node, fullPath: currentPath}}>[details]</Link>
                 </div>
             </div>
 
