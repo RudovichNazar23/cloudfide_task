@@ -1034,7 +1034,7 @@ Enhancements:
 
 # Known limitations
 
-### Only one file can uploaded
+### Only one file can be uploaded
 Only one file can be saved to the localStorage, so it limits the functionality and can be time consuming if user wants to explore more than one file tree.
 
 ### Tree expand state
