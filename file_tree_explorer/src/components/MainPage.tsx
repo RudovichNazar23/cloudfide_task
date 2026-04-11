@@ -1,4 +1,3 @@
-// @ts-ignore
 import { JSX } from 'react';
 
 import { useState, useEffect } from "react";
@@ -10,7 +9,7 @@ import FormHeader from "./FormHeader.tsx";
 import FormButton from "./FormButton.tsx";
 
 export default function MainPage(): JSX.Element {
-    // @ts-ignore
+
     const [errorMessage, setErrorMessage] = useState<string>("");
     const [data, setData] = useState<string | null>("");
     const navigate = useNavigate();
@@ -47,8 +46,8 @@ export default function MainPage(): JSX.Element {
             reader.readAsText(selectedFile);
         }
     };
-    // @ts-ignore
-    const onAddFile = (e:MouseEvent<HTMLButtonElement, MouseEvent>) => {
+
+    const onAddFile = (e:MouseEvent) => {
       e.preventDefault();
       const data = localStorage.getItem("treeData");
 

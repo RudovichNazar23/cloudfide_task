@@ -1,4 +1,3 @@
-// @ts-ignore
 import { JSX } from "react";
 import { useState, useEffect } from "react";
 
@@ -26,7 +25,7 @@ export default function SearchForm({ loadedData, setSearchResults }: SearchFormP
         setInputValue(e.target.value);
     };
 
-    const onClick = (e: MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const onClick = (e: MouseEvent) => {
         e.preventDefault();
 
         const searchedNames: Array<string> = searchAllNames(inputValue, loadedData);
