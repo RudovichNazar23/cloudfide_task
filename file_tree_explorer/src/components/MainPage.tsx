@@ -1,8 +1,10 @@
 // @ts-ignore
 import { JSX } from 'react';
 
-import { useState } from "react";
-import {useNavigate} from "react-router";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+
+import { Link } from "react-router-dom";
 
 import FormHeader from "./FormHeader.tsx";
 import FormButton from "./FormButton.tsx";
@@ -10,7 +12,13 @@ import FormButton from "./FormButton.tsx";
 export default function MainPage(): JSX.Element {
     // @ts-ignore
     const [errorMessage, setErrorMessage] = useState<string>("");
+    const [data, setData] = useState<string | null>("");
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const stored = localStorage.getItem("treeData");
+        if(stored) setData(stored);
+    }, []);
 
     const onChangeEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files || e.target.files.length === 0) return;
@@ -54,12 +62,24 @@ export default function MainPage(): JSX.Element {
     };
 
     const onDeleteEvent = () => {
-        localStorage.removeItem("treeData");
+        localStorage.clear();
         window.location.reload();
     }
 
     return (
         <div className={"row p-0 m-0"}>
+            {
+                data && (
+                    <nav className="navbar bg-body-secondary">
+                        <div className="container-fluid justify-content-between">
+                            <a className="navbar-brand" href={"/"}>File tree explorer</a>
+                            <div>
+                                <Link to={"/tree"} className={"btn btn-outline-info text-dark"}>Check out your file tree</Link>
+                            </div>
+                        </div>
+                    </nav>
+                )
+            }
             <div className={"row mt-4"}>
                 <FormHeader />
                 <div className={"row justify-content-center text-center"}>
