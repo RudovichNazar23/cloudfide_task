@@ -1032,7 +1032,20 @@ Enhancements:
     2) Export/import tree
 
 
+# Known limitations
 
+### Only one file can uploaded
+Only one file can be saved to the localStorage, so it limits the functionality and can be time consuming if user wants to explore more than one file tree.
+
+### Tree expand state
+If tree is expanded, and user opens a specific file or a specific folder detail, and after checking returns to the general tree view, the expand state is lost, which means that user has to open the tree from the beginning manually. And it's going to be a problem especially for a huge tree structures.
+
+### Manual url typing
+If user types a url address in the search bar manually, it will not workout.
+Then the NodeDetail component will return the message that it cannot retrieve the data.
+
+### Lack of showing name of the uploaded file after returning to the main page from the file tree page
+It can confuse user, so it influences on user experience in a negative way, that's why the navbar, which navigates to the file tree page, was added to the main page, so it indicates that there is some uploaded file earlier.
 
 
 
