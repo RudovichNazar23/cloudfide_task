@@ -1,5 +1,3 @@
-// @ts-ignore
-
 import { JSX } from "react";
 
 interface FormButtonProps {

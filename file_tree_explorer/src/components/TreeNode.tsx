@@ -1,4 +1,3 @@
-// @ts-ignore
 import { JSX } from "react";
 
 import { useState } from "react";

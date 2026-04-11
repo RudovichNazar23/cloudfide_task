@@ -1,5 +1,3 @@
-// @ts-ignore
-
 import { JSX } from "react";
 
 export default function FormHeader(): JSX.Element {
